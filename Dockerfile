@@ -5,6 +5,7 @@ FROM ubuntu:14.04
 
 # we're going to want this bad boy installed so we can connect :)
 RUN apt-get update && apt-get install -y ssh
+RUN apt-get install -y emacs
 
 ADD init-fake.conf /etc/init/fake-container-events.conf
 
@@ -45,6 +46,9 @@ ENV container docker
 
 # set a cheap, simple password for great convenience
 RUN echo 'root:docker.io' | chpasswd
+
+# set TERM, required for emacs
+ENV TERM xterm
 
 # we can has SSH
 EXPOSE 22
